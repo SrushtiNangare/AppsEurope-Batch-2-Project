@@ -2,11 +2,16 @@ package com.capgemini.entities;
 
  
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
  
@@ -23,10 +28,10 @@ import org.springframework.stereotype.Component;
 public class Menu {
     @Id/* defining primary key*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)/*generating value automatically*/
-    @Column(name="Menu_Id")/*specifying column name*/
-    private int menuId;
+    @Column(name="FOOD_ID")/*specifying column name*/
+    private int foodId;
     
-    /*specifying column name, giving length 
+	/*specifying column name, giving length 
 	and giving constraint as not null*/
     @Column(name="Food_Name", length=25, nullable = false)
     private String foodName;
@@ -35,6 +40,9 @@ public class Menu {
 	and giving constraint as not null*/
     @Column(name="Food_Price", length=25, nullable = false)
     private double foodPrice;
+    
+    @ManyToMany(fetch=FetchType.LAZY,mappedBy="menu")
+	private Set<Order> orders = new HashSet<>();
 
     /*creating parameterized constructor*/
     public Menu(String foodName, double foodPrice) {
@@ -49,6 +57,14 @@ public class Menu {
     }
     
     /*creating getters and setters*/
+    public int getFoodId() {
+		return foodId;
+	}
+
+	public void setFoodId(int foodId) {
+		this.foodId = foodId;
+	}
+	
     public String getFoodName() {
         return foodName;
     }
@@ -66,9 +82,11 @@ public class Menu {
     }
 
     /*creating tostring method*/
-    @Override
-    public String toString() {
-        return "Menu [foodName=" + foodName + ", foodPrice=" + foodPrice + "]";
-    }
+	@Override
+	public String toString() {
+		return "Menu [foodId=" + foodId + ", foodName=" + foodName + ", foodPrice=" + foodPrice + "]";
+	}
+
+    
 
 }

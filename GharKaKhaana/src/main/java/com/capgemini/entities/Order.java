@@ -4,8 +4,8 @@ package com.capgemini.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
- 
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -54,28 +56,29 @@ public class Order {
     @Column(name = "Order_Price", length = 10, nullable = false)
     private double orderPrice;
 
-    @Autowired /*setting up dependency*/
-    @JoinColumn(name = "Food_Items")/*assigning foreign key*/
-    @OneToOne(cascade = CascadeType.ALL)
-    private Menu foodItems;
+    @ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "food_orders", 
+				joinColumns = { @JoinColumn(name = "order_id") }, 
+				inverseJoinColumns = { @JoinColumn(name = "food_id") }
+				)
+	private Set<Menu> menu = new HashSet<>();
     
-    /*creating getters and setters for foodItems*/
-    public Menu getFoodItems() {
-        return foodItems;
-    }
+    
+	public Set<Menu> getMenu() {
+		return menu;
+	}
 
-    public void setFoodItems(Menu foodItems) {
-        this.foodItems = foodItems;
-    }
-    
-    /*creating parameterized constructor*/
-    public Order(LocalDate orderDate, LocalTime orderTime, String orderStatus, double orderPrice, Menu foodItems) {
+	public void setMenu(Set<Menu> menu) {
+		this.menu = menu;
+	}
+
+	/*creating parameterized constructor*/
+    public Order(LocalDate orderDate, LocalTime orderTime, String orderStatus, double orderPrice) {
         super();
         this.orderDate = orderDate;
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
         this.orderPrice = orderPrice;
-        this.foodItems = foodItems;
     }
 
     /*creating constructor*/
@@ -125,11 +128,6 @@ public class Order {
     }
 
     /*creating tostring method*/
-    @Override
-    public String toString() {
-        return "Order [orderId=" + orderId + ", orderDate=" + orderDate + ", orderTime=" + orderTime + ", orderStatus="
-                + orderStatus + ", orderPrice=" + orderPrice + ", foodItems=" + foodItems + "]";
-    }
 
  
 

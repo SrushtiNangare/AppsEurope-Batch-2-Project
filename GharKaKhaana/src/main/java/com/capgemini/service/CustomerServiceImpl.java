@@ -21,18 +21,21 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	/*Customer registers by giving information*/
 	public Customer registerCustomer(Customer customer) {
-		return null;
+		Customer result = customerRepository.save(customer);
+		return result;
 	}
 
 	/*Place Order by selecting dishes from menu */
 	@Override
 	public String placeOrder(Menu menu) {
+		
 		return null;
 	}
 
 	/*Cancel order by giving order id*/
 	@Override
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException {
+		
 		return false;
 	}
 

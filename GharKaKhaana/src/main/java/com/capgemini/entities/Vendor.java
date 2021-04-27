@@ -45,8 +45,10 @@ public class Vendor {
 
 	/* setting up dependency*/
 	@Autowired 
+	@OneToOne
 	@JoinColumn(name = "Menu_Id") // assigning foreign key
 	private Menu foodMenu;
+	@Autowired
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Vendor_Address_Id") // assigning foreign key
 	private VendorAddress vendorAddress;
