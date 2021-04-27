@@ -2,8 +2,10 @@ package com.capgemini.service;
 
 import java.util.List;
 
+import com.capgemini.entities.Customer;
 import com.capgemini.entities.Order;
 import com.capgemini.entities.Vendor;
+import com.capgemini.exceptions.NoSuchCustomerException;
 import com.capgemini.exceptions.NoSuchVendorException;
 
 public interface AdminService {
@@ -14,4 +16,5 @@ public interface AdminService {
 	public List<Order> findSortedOrderByDate();
 	public List<Order> findAllOrder();
 	public void sendOrderAdminToVendor(int vendorId) throws NoSuchVendorException;
+	public Customer findCustomerById(int customerId)throws NoSuchCustomerException;
 }

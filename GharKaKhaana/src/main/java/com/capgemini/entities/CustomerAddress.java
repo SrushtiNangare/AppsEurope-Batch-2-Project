@@ -28,6 +28,11 @@ public class CustomerAddress {
 	
 	/*specifying column name, giving length 
 	and giving constraint as not null*/
+	@Column(name="LANDMARK",length=25,nullable=false)
+	private String landmark;
+	
+	/*specifying column name, giving length 
+	and giving constraint as not null*/
 	@Column(name="STATE",length=25,nullable=false)
 	private String state;
 	
@@ -37,12 +42,13 @@ public class CustomerAddress {
 	private long pincode;
 	
 	/*creating parameterized constructor*/
-	public CustomerAddress(int addressId, String city, String state, long pincode) {
+	public CustomerAddress(int addressId, String city, String state, long pincode,String landmark) {
 		super();
 		this.addressId = addressId;
 		this.city = city;
 		this.state = state;
 		this.pincode = pincode;
+		this.landmark=landmark;
 	}
 	/*creating default constructor*/
 	public CustomerAddress() {

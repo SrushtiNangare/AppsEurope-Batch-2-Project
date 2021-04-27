@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 @Component/* it will detect our custom beans*/
 @Scope(scopeName = "prototype")/* keeping this as prototype*/
 @Entity/*Creating table*/
-@Table(name = "OrderTbl")/* Specifying table name*/
+@Table(name = "Ordertbl")/* Specifying table name*/
 public class Order {
     @Id/* defining primary key*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)/*generating value automatically*/
