@@ -29,8 +29,8 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 	
-	@PostMapping(path="/add",consumes=MediaType.APPLICATION_JSON_VALUE)
-	//http://localhost:9090/student-api/customers/add
+	@PostMapping(path="/addCustomer",consumes=MediaType.APPLICATION_JSON_VALUE)
+	//http://localhost:9090/student-api/customers/addCustomer
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
 		ResponseEntity<Customer> response= null;
 		Customer result = service.registerCustomer(customer);
@@ -41,6 +41,7 @@ public class CustomerController {
 		return response;
 	}
 	
+	//http://localhost:9090/student-api/customers/status/
 	@GetMapping(path="status/{orderId}")
     public ResponseEntity<Order> viewOrderStatus(@PathVariable("orderId") int orderId) throws NoSuchOrderException{
         ResponseEntity<Order> response = null;
@@ -53,7 +54,7 @@ public class CustomerController {
     }
 	
 	@DeleteMapping(path = "/cancel/{orderId}")
-    //http://localhost:9090/GharKaKhana-api/customers/cancel/order_Id
+    //http://localhost:9090/GharKaKhana-api/customers/cancel/
     public ResponseEntity<Order> cancelOrder(@PathVariable("orderId") int orderId) throws NoSuchOrderException {
         ResponseEntity<Order> response = null;
         boolean result = service.cancelOrder(orderId);
@@ -76,13 +77,6 @@ public class CustomerController {
 		return response;
 	}
 	
-	//http://localhost:9090/GharKaKhana-api/customers/getOrderStatus/
-	@GetMapping(path="/getOrderStatus/{orderId}")
-	public ResponseEntity<String> getOrderStatus(int orderId) throws NoSuchOrderException{
-		ResponseEntity<String> response = null;
-		String result = service.viewOrderStatus(orderId);
-		response = new ResponseEntity<String>(result,HttpStatus.OK);
-		return response;
-	}
+	
 
 }
