@@ -20,7 +20,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	/* Creating reference (it creates loosely coupled application) */
 	private CustomerRepository customerRepository;
-	
+	@Autowired
+	private OrderRepository orderRepository;
+	@Autowired
+	private AdminService adminService;
+	@Autowired
 	private MenuRepository menuRepository;
 
 	@Override
@@ -32,14 +36,21 @@ public class CustomerServiceImpl implements CustomerService {
 
 	/* Place Order by selecting dishes from menu */
 	@Override
-	public Order placeOrder(Order order) {
+	public String placeOrder(Order order) {
+
 		return null;
 	}
 
 	/* Cancel order by giving order id */
 	@Override
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException {
-		return false;
+		Order order = adminService.findOrderById(orderId);
+		if (order != null) {
+			orderRepository.delete(order);
+			return true;
+		} else {
+			throw new NoSuchOrderException("Order with id " + orderId + " not found");
+		}
 	}
 
 	@Override
@@ -51,14 +62,14 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	/* Search Dishes by their names */
 	public List<Menu> searchDishes(String foodName) throws NoSuchDishException {
-		
 		return null;
 	}
 
 	@Override
 	/* View Status of Order by giving order id */
 	public String viewOrderStatus(int orderId) throws NoSuchOrderException {
-		return null;
+		Order order = new Order();
+		return order.getOrderStatus();
 	}
 
 	@Override

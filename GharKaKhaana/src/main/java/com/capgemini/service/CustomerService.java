@@ -10,7 +10,7 @@ import com.capgemini.exceptions.NoSuchOrderException;
 
 public interface CustomerService {
 	public Customer registerCustomer(Customer customer);
-	public Order placeOrder(Order order);
+	public String placeOrder(Order order);
 	public String modifyOrder(Menu menu);
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException;
 	public List<Menu> viewDishesSortByPrice();
