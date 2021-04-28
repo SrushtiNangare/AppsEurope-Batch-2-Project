@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
- 
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -41,6 +40,8 @@ public class VendorAddress {
     @Column(name="Vendor_Pincode", length=6, nullable = false)
     private long vendorPincode;
 
+    @OneToOne(mappedBy="vendorAddress")
+    private Vendor vendor;
     /*creating parameterized constructor*/
     public VendorAddress(int vendorAddressId, String vendorCity, String vendorState, long vendorPincode) {
         super();

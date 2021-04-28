@@ -14,5 +14,6 @@ public interface CustomerService {
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException;
 	public List<Menu> viewDishesSortByPrice();
 	public List<Menu> searchDishes(String foodName) throws NoSuchDishException;
-	public void viewOrderStatus(int orderId) throws NoSuchOrderException;
+	public String viewOrderStatus(int orderId) throws NoSuchOrderException;
+	public List<Menu> viewMenu();
 }

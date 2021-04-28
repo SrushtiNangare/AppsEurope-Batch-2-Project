@@ -48,9 +48,9 @@ public class Vendor {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Menu_Id") // assigning foreign key
 	private Menu foodMenu;
-	@Autowired
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "Vendor_Address_Id") // assigning foreign key
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="VENDOR_ADDRESS_ID")
 	private VendorAddress vendorAddress;
 
 	/* creating getters and setters*/

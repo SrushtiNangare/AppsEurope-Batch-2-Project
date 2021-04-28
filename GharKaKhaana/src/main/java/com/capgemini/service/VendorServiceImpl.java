@@ -8,20 +8,20 @@ import org.springframework.stereotype.Service;
 import com.capgemini.entities.Menu;
 import com.capgemini.entities.Order;
 import com.capgemini.exceptions.NoSuchFoodItemException;
-import com.capgemini.repository.VendorRepository;
+import com.capgemini.repository.MenuRepository;
 
 @Service
 public class VendorServiceImpl implements VendorService{
 
-	@Autowired
 	/*Creating reference (it creates loosely coupled application)*/
-	private VendorRepository vendorRepository;
+	@Autowired
+	private MenuRepository menuRepository;
 	
 	@Override
 	/*Add Food to Menu by accepting values */
-	public Menu addFood(Menu menu) {
-		return null;
-	}
+    public Menu addFood(Menu menu) {// this method should't be included
+	        return menuRepository.save(menu);
+	    }
 
 	@Override
 	/*Modify Food to Menu*/
@@ -38,7 +38,7 @@ public class VendorServiceImpl implements VendorService{
 	@Override
 	/*View Menu*/
 	public List<Menu> viewMenu() {
-		return null;
+		return menuRepository.findAll();
 	}
 
 	@Override

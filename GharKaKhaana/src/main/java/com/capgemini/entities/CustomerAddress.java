@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.context.annotation.Scope;
@@ -40,6 +41,9 @@ public class CustomerAddress {
 	and giving constraint as not null*/
 	@Column(name="PINCODE",length=6,nullable=false)
 	private long pincode;
+	
+	@OneToOne(mappedBy = "customerAddress")
+	private Customer customer;
 	
 	/*creating parameterized constructor*/
 	public CustomerAddress(int addressId, String city, String state, long pincode,String landmark) {

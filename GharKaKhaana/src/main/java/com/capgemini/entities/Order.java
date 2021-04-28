@@ -19,9 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
- 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
  
@@ -56,6 +53,14 @@ public class Order {
     @Column(name = "Order_Price", length = 10, nullable = false)
     private double orderPrice;
 
+    @OneToOne
+    @JoinColumn(name="CUSTOMER_ID")
+    private Customer customer;
+    
+    @OneToOne
+    @JoinColumn(name="VENDOR_ID")
+    private Vendor vendor; 
+    
     @ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "food_orders", 
 				joinColumns = { @JoinColumn(name = "order_id") }, 

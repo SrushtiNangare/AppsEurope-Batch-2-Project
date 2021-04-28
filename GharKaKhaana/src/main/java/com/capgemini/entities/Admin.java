@@ -35,6 +35,7 @@ public class Admin {
 	constraint as not null*/
 	@Column(name = "Admin_Password", length = 10, nullable = false)
 	private String adminPassword;
+	
 
 	/* creating parameterized constructor*/
 	public Admin(String adminName, String adminUsername, String adminPassword) {

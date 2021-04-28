@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -50,9 +49,8 @@ public class Customer {
     @Column(name = "Password", length = 10, nullable = false)
     private String password;
 
-    @Autowired/* setting up depedency*/
-    @JoinColumn(name = "ADDRESS_ID")/*assigning foreign key*/
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="CUSTOMER_ADDRESS_ID")
     private CustomerAddress customerAddress;
 
     /*creating parameterized constructor*/
