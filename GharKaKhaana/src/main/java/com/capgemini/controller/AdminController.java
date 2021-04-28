@@ -33,8 +33,6 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	
-
 	@PostMapping(path = "/addAdmin", consumes = MediaType.APPLICATION_JSON_VALUE)
 	// http://localhost:9090/GharKaKhana-api/admins/addAdmin
 	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {

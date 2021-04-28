@@ -57,7 +57,23 @@ public class Order {
     @JoinColumn(name="CUSTOMER_ID")
     private Customer customer;
     
-    @OneToOne
+    public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
+	@OneToOne
     @JoinColumn(name="VENDOR_ID")
     private Vendor vendor; 
     

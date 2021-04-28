@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.capgemini.entities.Customer;
 import com.capgemini.entities.Menu;
+import com.capgemini.entities.Order;
 import com.capgemini.exceptions.NoSuchDishException;
 import com.capgemini.exceptions.NoSuchOrderException;
 
 public interface CustomerService {
 	public Customer registerCustomer(Customer customer);
-	public String placeOrder(Menu menu);
+	public Order placeOrder(Order order);
 	public String modifyOrder(Menu menu);
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException;
 	public List<Menu> viewDishesSortByPrice();
