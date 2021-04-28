@@ -30,7 +30,7 @@ public class CustomerController {
 	private CustomerService service;
 	
 	@PostMapping(path="/addCustomer",consumes=MediaType.APPLICATION_JSON_VALUE)
-	//http://localhost:9090/student-api/customers/addCustomer
+	/* http://localhost:9090/student-api/customers/addCustomer*/
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
 		ResponseEntity<Customer> response= null;
 		Customer result = service.registerCustomer(customer);
