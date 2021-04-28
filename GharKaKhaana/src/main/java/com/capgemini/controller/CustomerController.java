@@ -76,7 +76,4 @@ public class CustomerController {
 			response = new ResponseEntity<List<Menu>>(result,HttpStatus.BAD_REQUEST);
 		return response;
 	}
-	
-	
-
 }
