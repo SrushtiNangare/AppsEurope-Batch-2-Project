@@ -1,0 +1,75 @@
+insert into public.admin(
+    admin_id, admin_name, admin_password, admin_username)
+    values (1,'Makarand Bhoir','Makarand@*','Makarand');
+
+insert into admin values(2,'Sudheer','@Sudheer@','SudheerP');
+insert into admin values(3,'Kavita Arora','Kavi#@#','Karora');
+
+select * from admin;
+
+
+insert into public.customer_address(
+   address_id, city,landmark, pincode,state)
+    values (1,'Mumbai', 'Dadar',400014, 'Maharashtra');
+	
+insert into customer_address values (2,'Mumbai', 'Malad',400097, 'Maharashtra');
+insert into customer_address values (3,'Mumbai', 'Malad',400097, 'Maharashtra');
+insert into customer_address values (4,'Mumbai', 'Goregoan',400001, 'Maharashtra');
+insert into customer_address values (5,'Mumbai', 'Jogeshwari',400049, 'Maharashtra');
+insert into customer_address values (6,'Mumbai', 'Kandivali',400021, 'Maharashtra');
+insert into customer_address values (7,'Mumbai', 'Kurar',400087, 'Maharashtra');
+insert into customer_address values (8,'Mumbai', 'Vivekanand',410212, 'Maharashtra');
+insert into customer_address values (9,'Mumbai', 'Matunga',400041, 'Maharashtra');
+insert into customer_address values (10,'Mumbai','Malad',400097, 'Maharashtra');
+
+select * from customer_address;
+
+
+insert into customer values(101,7021727554, 'Beauty', 'Gupta', 'Beauty12@', 'Beauty',1);
+insert into public.customer(
+    customer_id,contact_no, first_name, last_name, password, user_name, address_id)
+    values (102,9054985323,'Manisha', 'Pal', 'Mani@12', 'Manisha',2);
+insert into customer values(103,8923211190, 'Shivam', 'Yadav', 'Shivu09@', 'Shivam',3);
+insert into customer values(104,9814229078, 'Sooraj', 'Yadav', 'Sooraj7&', 'Sooraj',4);
+insert into customer values(105,8923211190, 'Aradhya', 'Gupta', 'Aaru12%', 'Aradhya',5);
+
+select * from customer;
+
+
+insert into public.vendor_address(
+   vendor_address_id, vendor_city,vendor_pincode,vendor_state)
+    values (10,'Mumbai',400014, 'Maharashtra');
+insert into vendor_address values(11,'Mumbai',400097,'Maharashtra')
+
+select * from vendor_address;
+
+insert into public.menu
+	(food_id, food_name, food_price) 
+	values (1,'Veg Biryani',200);
+insert into menu values(2,'Chole Poori',120);
+insert into menu values(3,'Poori Aloo Bhaji',90);
+insert into menu values(4,'Dal Rice',100);
+insert into menu values(5,'Diet Meal',135);
+insert into menu values(6,'Ultimate Meal',150);
+
+select * from menu;
+
+insert into public.vendor(
+   vendor_id, vendor_contact,vendor_name,vendor_password, vendor_username, menu_id, vendor_address_id)
+    values (1,8454985329,'Ragini','Ragicg@','Ragini Gupta',1, 11);
+insert into vendor values(2,9769511120,'Srushti','Srush12@','Srushti Nangare',5, 10);
+
+select * from vendor;
+
+insert into public.order_details(
+   order_id, order_date,order_price,order_status,order_time)
+    values (1,'04.26.2021',200,'Ready','10:05:01');
+insert into order_details values (2,'04.26.2021',120,'Delivered','11:00:01');
+insert into order_details values (3,'04.27.2021',90,'Delivered','02:00:00');
+insert into order_details values (4,'04.27.2021',135,'On the way','08:30:00');
+insert into order_details values (5,'04.25.2021',150,'Ready','11:00:00');
+	
+select * from order_details;
+
+
+
