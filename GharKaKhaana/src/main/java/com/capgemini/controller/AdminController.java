@@ -23,6 +23,8 @@ import com.capgemini.exceptions.NoSuchCustomerException;
 import com.capgemini.exceptions.NoSuchOrderException;
 import com.capgemini.exceptions.NoSuchVendorException;
 import com.capgemini.service.AdminService;
+import com.capgemini.utilities.GlobalResources;
+import org.slf4j.Logger;
 
 
 
@@ -30,12 +32,17 @@ import com.capgemini.service.AdminService;
 @RequestMapping(path = "admins")
 public class AdminController {
 
+	private Logger logger = GlobalResources.getLogger(AdminController.class);
+	
 	@Autowired
 	private AdminService adminService;
 	
 	@PostMapping(path = "/addAdmin", consumes = MediaType.APPLICATION_JSON_VALUE)
 	// http://localhost:9090/GharKaKhana-api/admins/addAdmin
 	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
+		String methodName="addAdmin()";
+        logger.info(methodName + "called");
+		System.out.println(admin);
 		ResponseEntity<Admin> response = null;
 		Admin result = adminService.registerAdmin(admin);
 		if (result != null)
@@ -48,6 +55,7 @@ public class AdminController {
 	@PostMapping(path = "/addVendor", consumes = MediaType.APPLICATION_JSON_VALUE)
 	// http://localhost:9090/GharKaKhana-api/admins/addVendor
 	public ResponseEntity<Vendor> addVendor(@RequestBody Vendor vendor) {
+		System.out.println(vendor);
 		ResponseEntity<Vendor> response = null;
 		System.out.println(vendor);
 		Vendor result = adminService.addVendor(vendor);
@@ -60,6 +68,8 @@ public class AdminController {
 	// http://localhost:9090/GharKaKhana-api/admins/viewAllAdmin
 	@GetMapping(path="/viewAllAdmin")
 	public ResponseEntity<List<Admin>> getAllAdmin() {
+		String methodName="getAllAdmin()";
+        logger.info(methodName + "called");
 		ResponseEntity<List<Admin>> response = null;
 		List<Admin> result = adminService.findAllAdmins();
 		if(result != null)

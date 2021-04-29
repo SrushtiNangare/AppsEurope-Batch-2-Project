@@ -51,12 +51,12 @@ public class Customer {
     
     
     @OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="CUSTOMER_ADDRESS_ID")
+	@JoinColumn(name="ADDRESS_ID")
     private CustomerAddress customerAddress;
 
     /*creating parameterized constructor*/
 	public Customer(String firstName, String lastName, long contactNo, String userName,
-			String password) {
+			String password,CustomerAddress customerAddress) {
 		super();
 		
 		this.firstName = firstName;
@@ -64,6 +64,7 @@ public class Customer {
 		this.contactNo = contactNo;
 		this.userName = userName;
 		this.password = password;
+		this.customerAddress = customerAddress;
 	}
 	//creating default constructor
 	public Customer() {

@@ -40,6 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	public Vendor addVendor(Vendor vendor) {
 		Vendor result = null;
 		if (isValidVendor(vendor))
+			System.out.println(vendor);
 			result = vendorRepository.save(vendor); /* inserting record in vendor table */
 		return result;
 	}
@@ -66,7 +67,9 @@ public class AdminServiceImpl implements AdminService {
 	/* Updates vendor by accepting vendor id */
 	public Vendor modifyVendor(Vendor vendor) throws NoSuchVendorException {
 		Vendor result = null;
+		
 		if (isValidVendor(vendor))
+			
 			result = vendorRepository.save(vendor);
 		return result;
 	}
@@ -165,6 +168,7 @@ public class AdminServiceImpl implements AdminService {
 	public Admin registerAdmin(Admin admin) {
 		Admin result = null;
 		if (isValidAdmin(admin))
+			System.out.println(admin);
 			result = adminRepository.save(admin);
 		return result;
 	}
@@ -187,11 +191,11 @@ public class AdminServiceImpl implements AdminService {
 
 	private boolean isValidAdmin(Admin admin) {
 		boolean flag = true;
-		if (!admin.getAdminName().matches("[A-Za-z]+"))
+		if (!admin.getAdminName().matches("[A-Za-z]"))
 			flag = false;
-		else if (!admin.getAdminUsername().matches("[A-Za-z]+"))
+		else if (!admin.getAdminUsername().matches("[A-Za-z]"))
 			flag = false;
-		else if (!admin.getAdminPassword().matches("(?=.*[A-Za-z])(?=.*[@#$%&])"))
+		else if (!admin.getAdminPassword().matches("[A-Za-z][@#$%&]"))
 			flag = false;
 		return flag;
 	}
@@ -199,11 +203,11 @@ public class AdminServiceImpl implements AdminService {
 	public boolean isValidVendor(Vendor vendor) {
 		boolean flag = true;
 		String s = Long.toString(vendor.getVendorContact());
-		if (!vendor.getVendorName().matches("[A-Za-z]+"))
+		if (!vendor.getVendorName().matches("[A-Za-z]"))
 			flag = false;
 		else if (!vendor.getVendorUsername().matches("[A-Za-z]"))
 			flag = false;
-		else if (!vendor.getVendorPassword().matches("(?=.*[A-Za-z])(?=.*[@#$%&])"))
+		else if (!vendor.getVendorPassword().matches("[A-Za-z][@#$%&]"))
 			flag = false;
 		else if (!s.matches("\\d{10}"))
 			flag = false;

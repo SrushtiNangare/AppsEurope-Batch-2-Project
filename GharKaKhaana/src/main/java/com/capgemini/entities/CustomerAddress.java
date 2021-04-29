@@ -45,6 +45,12 @@ public class CustomerAddress {
 	@OneToOne(mappedBy = "customerAddress")
 	private Customer customer;
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	/*creating parameterized constructor*/
 	public CustomerAddress(int addressId, String city, String state, long pincode,String landmark) {
 		super();
