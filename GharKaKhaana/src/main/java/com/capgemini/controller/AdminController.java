@@ -69,6 +69,18 @@ public class AdminController {
 		return response;
 	}
 	
+	// http://localhost:9090/GharKaKhana-api/admins/viewAllCustomer
+	@GetMapping(path="/viewAllCustomer")
+	public ResponseEntity<List<Customer>> getAllCustomer() {
+		ResponseEntity<List<Customer>> response = null;
+		List<Customer> result = adminService.findAllCustomer();
+		if(result != null)
+			response = new ResponseEntity<List<Customer>>(result,HttpStatus.OK);
+		else
+			response = new ResponseEntity<List<Customer>>(result,HttpStatus.BAD_REQUEST);
+		return response;
+	}
+	
 	// http://localhost:9090/GharKaKhana-api/admins/viewAllVendor
 	@GetMapping(path="/viewAllVendor")
 	public ResponseEntity<List<Vendor>> getAllVendor() {

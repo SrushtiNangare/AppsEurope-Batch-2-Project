@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.entities.Customer;
 import com.capgemini.entities.Menu;
 import com.capgemini.entities.Order;
+import com.capgemini.exceptions.NoSuchCustomerException;
 import com.capgemini.exceptions.NoSuchDishException;
 import com.capgemini.exceptions.NoSuchOrderException;
 import com.capgemini.service.CustomerService;
@@ -43,9 +44,9 @@ public class CustomerController {
 	
 	//http://localhost:9090/student-api/customers/status/
 	@GetMapping(path="status/{orderId}")
-    public ResponseEntity<Order> viewOrderStatus(@PathVariable("orderId") int orderId) throws NoSuchOrderException{
+    public ResponseEntity<Order> viewOrderStatus(@PathVariable("orderId") int orderId) throws NoSuchOrderException, NoSuchCustomerException{
         ResponseEntity<Order> response = null;
-        String result = service.viewOrderStatus(orderId);
+        Order result = service.viewOrderStatus(orderId);
         if(result != null)
             response = new ResponseEntity<Order>(HttpStatus.ACCEPTED);
         else

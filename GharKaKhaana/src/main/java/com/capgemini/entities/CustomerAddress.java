@@ -90,6 +90,13 @@ public class CustomerAddress {
 	public void setPincode(long pincode) {
 		this.pincode = pincode;
 	}
+	
+	public String getLandmark() {
+		return landmark;
+	}
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
 
 	/*creating tostring method*/
 	@Override

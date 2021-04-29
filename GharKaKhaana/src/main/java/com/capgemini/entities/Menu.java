@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
- 
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +42,9 @@ public class Menu {
     @ManyToMany(fetch=FetchType.LAZY,mappedBy="menu")
 	private Set<Order> orders = new HashSet<>();
 
+    @ManyToMany(fetch=FetchType.LAZY,mappedBy="menu")
+	private Set<Vendor> vendor = new HashSet<>();
+    
     /*creating parameterized constructor*/
     public Menu(String foodName, double foodPrice) {
         super();

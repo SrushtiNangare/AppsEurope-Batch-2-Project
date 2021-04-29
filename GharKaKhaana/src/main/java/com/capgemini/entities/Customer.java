@@ -48,7 +48,8 @@ public class Customer {
 	and giving constraint as not null*/
     @Column(name = "Password", length = 10, nullable = false)
     private String password;
-
+    
+    
     @OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CUSTOMER_ADDRESS_ID")
     private CustomerAddress customerAddress;

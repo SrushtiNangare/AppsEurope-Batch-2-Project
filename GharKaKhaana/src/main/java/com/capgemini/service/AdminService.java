@@ -25,4 +25,5 @@ public interface AdminService {
 	public Admin registerAdmin(Admin admin); //done
 	public List<Admin> findAllAdmins(); //done
 	public List<Vendor> findAllVendors(); //done
+	public List<Customer> findAllCustomer();
 }

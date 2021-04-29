@@ -37,10 +37,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	/* Adds vendor by accepting vendor object*/
-	public Vendor addVendor(Vendor vendor) { 
-		Vendor result = vendorRepository.save(vendor); /* inserting record in vendor table */
-		return result;
-	}
+	public Vendor addVendor(Vendor vendor) {
+        Vendor result = null;
+        if(isValidVendor(vendor))
+            result = vendorRepository.save(vendor); /* inserting record in vendor table */
+        return result;
+    }
 
 	@Override
 	/*Deletes vendor by accepting Vendor Id */
@@ -56,7 +58,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	/*Updates vendor by accepting vendor id*/
 	public Vendor modifyVendor(Vendor vendor) throws NoSuchVendorException { 
-		return vendorRepository.save(vendor);
+		Vendor result = null;
+		if(isValidVendor(vendor))
+			result = vendorRepository.save(vendor);
+		return result;
 	}
 
 	@Override
@@ -94,7 +99,6 @@ public class AdminServiceImpl implements AdminService {
 				throw new NoSuchCustomerException("Customer with "+customerId+" is not found"); /*Throwing and handling exception */
 			}
 			return null;
-		
 	}
 
 	@Override
@@ -138,7 +142,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
     /*Register Admin with their details*/
     public Admin registerAdmin(Admin admin) {
-        return adminRepository.save(admin);
+		Admin result=null;
+        if(isValidAdmin(admin)) 
+        	result = adminRepository.save(admin);
+        return result;
     }
 	
 	@Override
@@ -151,5 +158,35 @@ public class AdminServiceImpl implements AdminService {
 	public List<Vendor> findAllVendors() {
 		return vendorRepository.findAll();
 	}
+
+	@Override
+	public List<Customer> findAllCustomer() {
+		return customerRepository.findAll();
+	}
+	
+	private boolean isValidAdmin(Admin admin) {
+		boolean flag = true;
+		if (!admin.getAdminName().matches("[A-Za-z]+"))
+			flag = false;
+		else if(!admin.getAdminUsername().matches("[A-Za-z]+"))
+			flag = false;
+		else if(!admin.getAdminPassword().matches("(?=.*[A-Za-z])(?=.*[@#$%&])"))
+			flag=false;
+		return flag;
+	}
+	
+	public boolean isValidVendor(Vendor vendor) {
+        boolean flag = true;
+        String s = Long.toString(vendor.getVendorContact());
+        if(!vendor.getVendorName().matches("[A-Za-z]+"))
+            flag = false;
+        else if(!vendor.getVendorUsername().matches("[A-Za-z]"))
+            flag = false;
+        else if(!vendor.getVendorPassword().matches("(?=.*[A-Za-z])(?=.*[@#$%&])"))
+            flag = false;
+        else if(!s.matches("\\d{10}"))
+            flag = false;
+        return flag;
+    }
 
 }

@@ -53,9 +53,13 @@ public class Order {
     @Column(name = "Order_Price", length = 10, nullable = false)
     private double orderPrice;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="CUSTOMER_ID")
     private Customer customer;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="VENDOR_ID")
+    private Vendor vendor;
     
     public Customer getCustomer() {
 		return customer;
@@ -72,10 +76,6 @@ public class Order {
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
 	}
-
-	@OneToOne
-    @JoinColumn(name="VENDOR_ID")
-    private Vendor vendor; 
     
     @ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "food_orders", 
