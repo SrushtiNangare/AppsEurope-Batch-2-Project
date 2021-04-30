@@ -31,7 +31,7 @@ public class VendorController {
     @GetMapping(path = "findFoodId/{foodId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Menu> getFoodById(@PathVariable("foodId") int foodId) throws NoSuchOrderException, NoSuchFoodItemException {
         ResponseEntity<Menu> response = null;
-        Menu result = adminService.findMenuById(foodId);
+        Menu result = adminService.findFoodById(foodId);
         response = new ResponseEntity<Menu>(result, HttpStatus.FOUND);
         return response;
     }

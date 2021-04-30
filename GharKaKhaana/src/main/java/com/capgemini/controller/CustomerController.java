@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ import com.capgemini.exceptions.NoSuchDishException;
 import com.capgemini.exceptions.NoSuchOrderException;
 import com.capgemini.service.CustomerService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping(path="customers")
@@ -31,8 +32,9 @@ public class CustomerController {
 	private CustomerService service;
 	
 	@PostMapping(path="/addCustomer",consumes=MediaType.APPLICATION_JSON_VALUE)
-	/* http://localhost:9090/student-api/customers/addCustomer*/
+	/* http://localhost:9090/GharKaKhana-api/customers/addCustomer*/
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+		System.out.println(customer);
 		ResponseEntity<Customer> response= null;
 		Customer result = service.registerCustomer(customer);
 		if(result != null)
@@ -42,7 +44,7 @@ public class CustomerController {
 		return response;
 	}
 	
-	//http://localhost:9090/student-api/customers/status/
+	//http://localhost:9090/GharKaKhana-api/customers/status/
 	@GetMapping(path="status/{orderId}")
     public ResponseEntity<Order> viewOrderStatus(@PathVariable("orderId") int orderId) throws NoSuchOrderException, NoSuchCustomerException{
         ResponseEntity<Order> response = null;

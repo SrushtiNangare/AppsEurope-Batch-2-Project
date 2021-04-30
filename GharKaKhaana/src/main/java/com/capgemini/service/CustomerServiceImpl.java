@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,12 @@ import com.capgemini.exceptions.NoSuchOrderException;
 import com.capgemini.repository.CustomerRepository;
 import com.capgemini.repository.MenuRepository;
 import com.capgemini.repository.OrderRepository;
+import com.capgemini.utilities.GlobalResources;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
+	Logger logger = GlobalResources.getLogger(CustomerServiceImpl.class);
 
 	@Autowired
 	/* Creating reference (it creates loosely coupled application) */
@@ -31,15 +35,22 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	/* Customer registers by giving information */
 	public Customer registerCustomer(Customer customer) {
+		String methodName = "registerCustomer()";
+		logger.info(methodName + "called");
 		Customer result = null;
-		if (isValidCustomer(customer))
+		System.out.println(customer);
+		if (isValidCustomer(customer)) {
+			logger.info("Valid Customer");
 			result = customerRepository.save(customer);
+		}
 		return result;
 	}
 
 	/* Place Order by selecting dishes from menu */
 	@Override
 	public Order placeOrder(Order order) {
+		String methodName = "placeOrder()";
+		logger.info(methodName + "called");
 		Order result = orderRepository.save(order); /* inserting record in vendor table */
 		return result;
 	}
@@ -47,109 +58,131 @@ public class CustomerServiceImpl implements CustomerService {
 	/* Cancel order by giving order id */
 	@Override
 	public boolean cancelOrder(int orderId) throws NoSuchOrderException {
-		if (isvalidOrderId(orderId)) {
-			try {
+		String methodName = "cancelOrder()";
+		logger.info(methodName + "called");
+		try {
+			if (isvalidOrderId(orderId)) {
+				logger.info("Valid Order Id");
 				Order order = findOrderById(orderId); /* calling method findOrderById */
 				if (order != null) {
 					orderRepository.delete(order);
 					return true;
 				}
-			} catch (NoSuchElementException e) {
-				throw new NoSuchOrderException(
-						"Order with " + orderId + " is not found"); /* Throwing and handling exception */
 			}
+		} catch (NoSuchElementException e) {
+			throw new NoSuchOrderException(
+					"Order with " + orderId + " is not found"); /* Throwing and handling exception */
 		}
+
 		return false;
 	}
 
 	@Override
 	public Order findOrderById(int orderId) throws NoSuchOrderException {
-		if (isvalidOrderId(orderId)) {
-			try {
+		String methodName = "findOrderById()";
+		logger.info(methodName + "called");
+		try {
+			if (isvalidOrderId(orderId)) {
+				logger.info("Valid Order Id");
 				Optional<Order> order = orderRepository.findById(orderId); /* selecting order by id */
 				if (order.get() != null) {
 					return order.get();
 				}
-			} catch (NoSuchElementException e) {
-				throw new NoSuchOrderException(
-						"Order with " + orderId + " is not found"); /* Throwing and handling exception */
 			}
+		} catch (NoSuchElementException e) {
+			throw new NoSuchOrderException(
+					"Order with " + orderId + " is not found"); /* Throwing and handling exception */
 		}
+
 		return null;
 	}
 
 	@Override
 	/* View Dishes by Price in Ascending or Descending Order */
 	public List<Menu> viewDishesSortByPrice() {
+		String methodName = "viewDishesSortByPrice()";
+		logger.info(methodName + "called");
 		return menuRepository.getDishesBySortedAmount();
 	}
 
 	@Override
 	/* Search Dishes by their names */
 	public List<Menu> searchDishes(String foodName) throws NoSuchDishException {
+		String methodName = "searchDishes()";
+		logger.info(methodName + "called");
 		return menuRepository.getDishesByName();
 	}
 
 	@Override
 	/* View Status of Order by giving order id */
 	public Order viewOrderStatus(int orderId) throws NoSuchOrderException, NoSuchCustomerException {
-		if (isvalidOrderId(orderId)) {
-			try {
+		String methodName = "searchDishes()";
+		logger.info(methodName + "called");
+		try {
+			if (isvalidOrderId(orderId)) {
+				logger.info("Valid Order Id");
 				Optional<Order> order = orderRepository.findById(orderId); /* checking status by id */
 				if (order.get() != null) {
 					return order.get();
 				}
-			} catch (NoSuchElementException e) {
-				throw new NoSuchCustomerException(
-						"Customer with " + orderId + " is not found"); /* Throwing and handling exception */
 			}
+		} catch (NoSuchElementException e) {
+			throw new NoSuchCustomerException(
+					"Customer with " + orderId + " is not found"); /* Throwing and handling exception */
 		}
+
 		return null;
 	}
 
 	@Override
 	/* Update Order by selecting from menu */
 	public Order modifyOrder(int orderId) throws NoSuchOrderException {
-		if (isvalidOrderId(orderId))
-			try {
+		String methodName = "modifyOrder()";
+		logger.info(methodName + "called");
+		try {
+			if (isvalidOrderId(orderId)) {
+				logger.info("Valid Order Id");
 				Order order = findOrderById(orderId); /* calling method findVendorById */
 				if (order != null) {
 					orderRepository.save(order);
 					return order;
 				}
-			} catch (NoSuchElementException e) {
-				throw new NoSuchOrderException(
-						"Order with " + orderId + " is not found");/* Throwing and handling exception */
 			}
+		} catch (NoSuchElementException e) {
+			throw new NoSuchOrderException(
+					"Order with " + orderId + " is not found");/* Throwing and handling exception */
+		}
 		return null;
 	}
 
 	@Override
 	public List<Menu> viewMenu() {
+		String methodName = "veiwMenu()";
+		logger.info(methodName + "called");
 		return menuRepository.findAll();
 	}
 
 	public boolean isValidCustomer(Customer customer) {
 		boolean flag = true;
 		String s = Long.toString(customer.getContactNo());
-		if (!customer.getFirstName().matches("[A-Za-z]"))
+		if (!customer.getFirstName().matches("[A-Za-z]+"))
 			flag = false;
-		else if (!customer.getLastName().matches("[A-Za-z]"))
+		else if (!customer.getLastName().matches("[A-Za-z]+"))
 			flag = false;
-		else if (!customer.getUserName().matches("[A-Za-z]"))
+		else if (!customer.getUserName().matches("[A-Za-z]+"))
 			flag = false;
-		else if (!customer.getPassword().matches("(?=.*[A-Za-z])(?=.*[@#$%&])"))
+		else if (!customer.getPassword().matches("[A-Za-z]+[@#$%&]"))
 			flag = false;
 		else if (!s.matches("\\d{10}"))
+			flag = false;
+		else if (!customer.getEmailId().matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
 			flag = false;
 		return flag;
 	}
 
 	public boolean isvalidOrderId(int orderId) {
-		Order order = new Order();
 		boolean flag = true;
-		String id = Integer.toString(order.getOrderId());
-		if (!id.matches("[0-9]"))
+		if (orderId <= 0)
 			flag = false;
 		return flag;
 	}
@@ -157,8 +190,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean isValidFoodId(int foodId) {
 		Menu menu = new Menu();
 		boolean flag = true;
-		String fid = Integer.toString(menu.getFoodId());
-		if (!fid.matches("[0-9]"))
+		if (menu.getFoodId() <= 0)
 			flag = false;
 		return flag;
 	}

@@ -15,5 +15,5 @@ public interface VendorService {
     //public Order sendOrderToCustomer(int orderId);
     public void setOrderStatus();
     public List<Order> viewOrder();
-    public Menu findMenuById(int foodId) throws NoSuchFoodItemException;
+    public Menu findFoodById(int foodId) throws NoSuchFoodItemException;
 }

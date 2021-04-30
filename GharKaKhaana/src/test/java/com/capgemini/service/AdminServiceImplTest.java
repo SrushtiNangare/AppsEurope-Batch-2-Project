@@ -25,20 +25,23 @@ class AdminServiceImplTest {
 	@Test
 	void testFindCustomerByCustomerIdShouldReturnCustomerObject() throws NoSuchCustomerException {
 		Customer customer = new Customer();
-		customer.setFirstName("keval");
-		customer.setLastName("chheda");
+		customer.setFirstName("Keval");
+		customer.setLastName("Chheda");
 		customer.setUserName("Keuuval");
-		customer.setPassword("kev");
+		customer.setPassword("Kev@");
 		customer.setContactNo(4545454545L);
 		CustomerAddress address = new CustomerAddress();
 		// address.setAddressId(11);
 		address.setCity("Thane");
-		address.setLandmark("dadar");
+		address.setArea("dadar");
 		address.setState("Maharashtra");
 		address.setPincode(400001);
 		customer.setCustomerAddress(address);
 
+		
+		
 		Customer expected = customerService.registerCustomer(customer);
+		System.out.println(expected);
 		Customer actual = service.findCustomerById(expected.getCustomerId());
 		// CustomerAddress expected1 = service.addCustomerAddress(address);
 		// CustomerAddress actual1 = service.findAddressById(expected.getAddressId());

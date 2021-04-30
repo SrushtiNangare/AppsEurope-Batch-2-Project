@@ -1,5 +1,7 @@
 package com.capgemini.entities;
 
+ 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,129 +12,161 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+ 
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component/* it will detect our custom beans*/
-@Scope(scopeName = "prototype")/* keeping this as prototype*/
-@Entity/*Creating table*/
-@Table(name = "Customer")/* Specifying table name*/
+ 
+
+@Component /* it will detect our custom beans */
+@Scope(scopeName = "prototype") /* keeping this as prototype */
+@Entity /* Creating table */
+@Table(name = "Customer") /* Specifying table name */
 public class Customer {
 
-	@Id/* defining primary key*/
-    @GeneratedValue(strategy = GenerationType.IDENTITY)/*generating value automatically*/
-    @Column(name = "Customer_Id")/*specifying column name*/ 
+    @Id /* defining primary key */
+    @GeneratedValue(strategy = GenerationType.IDENTITY) /* generating value automatically */
+    @Column(name = "Customer_Id") /* specifying column name */
     private int customerId;
 
-	/*specifying column name, giving length 
-	and giving constraint as not null*/
+    /*
+     * specifying column name, giving length and giving constraint as not null
+     */
     @Column(name = "First_Name", length = 25, nullable = false)
     private String firstName;
 
-    /*specifying column name, giving length 
-	and giving constraint as not null*/
+    /*
+     * specifying column name, giving length and giving constraint as not null
+     */
     @Column(name = "Last_Name", length = 25, nullable = false)
     private String lastName;
 
-    /*specifying column name, giving length 
-	and giving constraint as not null*/
+    /*
+     * specifying column name, giving length and giving constraint as not null
+     */
     @Column(name = "Contact_No", length = 10, nullable = false)
     private long contactNo;
 
-    /*specifying column name, giving length 
-	and giving constraint as not null*/
+    /*
+     * specifying column name, giving length and giving constraint as not null
+     */
     @Column(name = "User_Name", length = 25, nullable = false)
     private String userName;
 
-    /*specifying column name, giving length 
-	and giving constraint as not null*/
+    /*
+     * specifying column name, giving length and giving constraint as not null
+     */
     @Column(name = "Password", length = 10, nullable = false)
     private String password;
     
-    
-    @OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="ADDRESS_ID")
+    @Column(name="EMAIL_ID",length=50,nullable=false)
+    private String emailId;
+
+    public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDER_ID")
+    private Order customerOrder;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ADDRESS_ID")
     private CustomerAddress customerAddress;
 
-    /*creating parameterized constructor*/
-	public Customer(String firstName, String lastName, long contactNo, String userName,
-			String password,CustomerAddress customerAddress) {
-		super();
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.contactNo = contactNo;
-		this.userName = userName;
-		this.password = password;
-		this.customerAddress = customerAddress;
-	}
-	//creating default constructor
-	public Customer() {
+    /* creating parameterized constructor */
+    public Customer(String firstName, String lastName, long contactNo, String userName, String password,
+            Order customerOrder, CustomerAddress customerAddress) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactNo = contactNo;
+        this.userName = userName;
+        this.password = password;
+        this.customerOrder = customerOrder;
+        this.customerAddress = customerAddress;
+    }
 
-	}
-	// creating getters and setters
-	public int getCustomerId() {
-		return customerId;
-	}
+    // creating default constructor
+    public Customer() {
+    }
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+    // creating getters and setters
+    public Order getCustomerOrder() {
+        return customerOrder;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setCustomerOrder(Order customerOrder) {
+        this.customerOrder = customerOrder;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public int getCustomerId() {
+        return customerId;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public long getContactNo() {
-		return contactNo;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public long getContactNo() {
+        return contactNo;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setContactNo(long contactNo) {
+        this.contactNo = contactNo;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public CustomerAddress getCustomerAddress() {
-		return customerAddress;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setCustomerAddress(CustomerAddress customerAddress) {
-		this.customerAddress = customerAddress;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	/*creating tostring method*/
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", contactNo=" + contactNo + ", userName=" + userName + ", password=" + password
-				+ ", customerAddress=" + customerAddress + "]";
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public CustomerAddress getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(CustomerAddress customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    /* creating tostring method */
+    @Override
+    public String toString() {
+        return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
+                + ", contactNo=" + contactNo + ", userName=" + userName + ", password=" + password + ", customerOrder="
+                + customerOrder + ", customerAddress=" + customerAddress + "]";
+    }
 
 }
